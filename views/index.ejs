@@ -1,16 +1,49 @@
 <%- include('partials/header.ejs') %>
 
-<main>
-  <form class="w-100 me-3" action="/submit" method="post">
-    <input
-      type="text"
-      name="name"
-      id="username"
-      placeholder="Enter the user name"
-      required
-    />
-    <button type="submit">Search</button>
-  </form>
-</main>
+  <main class="home">
+    <div class="home-bg">
+      <div class="grid-overlay"></div>
+      <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
+    </div>
 
-<%- include('partials/footer.ejs') %>
+    <div class="search-wrapper">
+      <div class="search-badge">GitHub Profile Analyzer</div>
+      <h1 class="search-title">
+        Decode any<br /><span class="accent">developer</span>
+      </h1>
+      <p class="search-sub">Enter a GitHub username to generate a full profile analysis, repository breakdown, and
+        developer score.</p>
+
+      <form action="/submit" method="post" class="search-form">
+        <div class="input-wrap">
+          <span class="input-icon">@</span>
+          <input type="text" name="name" id="username" placeholder="torvalds" autocomplete="off" required />
+        </div>
+        <button type="submit" class="btn-analyze">
+          <span>Analyze</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+      </form>
+
+      <div class="search-examples">
+        <span>Try:</span>
+        <a href="#" class="example-tag" onclick="fillUsername('torvalds')">torvalds</a>
+        <a href="#" class="example-tag" onclick="fillUsername('gaearon')">gaearon</a>
+        <a href="#" class="example-tag" onclick="fillUsername('sindresorhus')">sindresorhus</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function fillUsername(name) {
+      event.preventDefault();
+      document.getElementById('username').value = name;
+      document.getElementById('username').focus();
+    }
+  </script>
+
+  <%- include('partials/footer.ejs') %>

@@ -1,26 +1,220 @@
 <%- include('partials/header.ejs') %>
 
-  <main>
-    <img src="<%= data.image_url %>" alt="user image" />
-    <h1>
-      <%= data.user_name %>
-    </h1>
-    <p>
-      <%= data.bio %>
-    </p>
-    <h2>Repositories</h2>
+  <main class="dashboard">
 
-    <ul>
-      <% data.repos.forEach(repo=> { %>
-        <li>
-          <a href="<%= repo.html_url %>" target="_blank">
-            <%= repo.name %>
+    <!-- PROFILE HEADER -->
+    <section class="profile-hero">
+      <div class="profile-hero-bg">
+        <div class="glow glow-1"></div>
+      </div>
+      <div class="container">
+        <div class="profile-card">
+          <div class="avatar-wrap">
+            <img src="<%= data.image_url %>" alt="avatar" class="avatar" />
+            <div class="avatar-ring"></div>
+          </div>
+
+          <div class="profile-info">
+            <div class="profile-names">
+              <h1 class="profile-realname">
+                <%= data.user_name %>
+              </h1>
+              <span class="profile-handle">@<%= data.username %></span>
+            </div>
+            <p class="profile-bio">
+              <%= data.bio %>
+            </p>
+
+            <div class="profile-meta">
+              <% if (data.location !=='Unknown' ) { %>
+                <div class="meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  <span>
+                    <%= data.location %>
+                  </span>
+                </div>
+                <% } %>
+                  <div class="meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    <span>
+                      <%= data.followers %> followers
+                    </span>
+                  </div>
+                  <div class="meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>
+                    <span>
+                      <%= data.following %> following
+                    </span>
+                  </div>
+                  <div class="meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M3 3h18v18H3z" />
+                      <path d="M3 9h18M9 21V9" />
+                    </svg>
+                    <span>
+                      <%= data.repos_count %> repos
+                    </span>
+                  </div>
+            </div>
+          </div>
+
+          <div class="score-display">
+            <div class="score-ring">
+              <svg viewBox="0 0 120 120" class="score-svg">
+                <circle cx="60" cy="60" r="52" class="score-track" />
+                <circle cx="60" cy="60" r="52" class="score-fill"
+                  style="stroke-dasharray: <%= Math.round(data.analytics.score * 3.267) %> 327" />
+              </svg>
+              <div class="score-inner">
+                <span class="score-num">
+                  <%= data.analytics.score %>
+                </span>
+                <span class="score-label">score</span>
+              </div>
+            </div>
+            <p class="score-caption">Developer Score</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+
+      <!-- STATS ROW -->
+      <section class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon">★</div>
+          <div class="stat-body">
+            <span class="stat-value">
+              <%= data.analytics.totalStars.toLocaleString() %>
+            </span>
+            <span class="stat-label">Total Stars</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⑂</div>
+          <div class="stat-body">
+            <span class="stat-value">
+              <%= data.analytics.totalForks.toLocaleString() %>
+            </span>
+            <span class="stat-label">Total Forks</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">#</div>
+          <div class="stat-body">
+            <span class="stat-value">
+              <%= data.repos_count %>
+            </span>
+            <span class="stat-label">Public Repos</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">◈</div>
+          <div class="stat-body">
+            <span class="stat-value">
+              <%= data.analytics.languages.length %>
+            </span>
+            <span class="stat-label">Languages</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- LANGUAGES -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Languages</h2>
+          <span class="section-count">
+            <%= data.analytics.languages.length %> detected
+          </span>
+        </div>
+        <div class="lang-tags">
+          <% data.analytics.languages.forEach((lang, i)=> { %>
+            <span class="lang-tag" style="animation-delay: <%= i * 0.05 %>s">
+              <%= lang %>
+            </span>
+            <% }) %>
+        </div>
+      </section>
+
+      <!-- TOP REPO -->
+      <% if (data.analytics.topRepo) { %>
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">Top Repository</h2>
+            <span class="section-badge">Most Starred</span>
+          </div>
+          <a href="<%= data.analytics.topRepo.html_url %>" target="_blank" class="top-repo-card">
+            <div class="top-repo-main">
+              <h3 class="top-repo-name">
+                <%= data.analytics.topRepo.name %>
+              </h3>
+              <p class="top-repo-desc">
+                <%= data.analytics.topRepo.description || "No description available" %>
+              </p>
+            </div>
+            <div class="top-repo-stats">
+              <div class="repo-stat"><span>★</span>
+                <%= data.analytics.topRepo.stargazers_count.toLocaleString() %>
+              </div>
+              <div class="repo-stat"><span>⑂</span>
+                <%= data.analytics.topRepo.forks_count.toLocaleString() %>
+              </div>
+              <% if (data.analytics.topRepo.language) { %>
+                <div class="repo-stat lang-dot"><span class="dot"></span>
+                  <%= data.analytics.topRepo.language %>
+                </div>
+                <% } %>
+            </div>
+            <div class="top-repo-arrow">→</div>
           </a>
-          <p>
-            <%= repo.description || "No description" %>
-          </p>
-        </li>
-        <% }) %>
-    </ul>
+        </section>
+        <% } %>
+
+          <!-- ALL REPOS -->
+          <section class="section">
+            <div class="section-header">
+              <h2 class="section-title">Repositories</h2>
+              <span class="section-count">
+                <%= data.repos.length %> repos
+              </span>
+            </div>
+            <div class="repo-grid">
+              <% data.repos.forEach((repo, i)=> { %>
+                <a href="<%= repo.html_url %>" target="_blank" class="repo-card"
+                  style="animation-delay: <%= i * 0.04 %>s">
+                  <div class="repo-card-top">
+                    <h3 class="repo-name">
+                      <%= repo.name %>
+                    </h3>
+                    <% if (repo.language) { %><span class="repo-lang-badge">
+                        <%= repo.language %>
+                      </span>
+                      <% } %>
+                  </div>
+                  <p class="repo-desc">
+                    <%= repo.description || "No description" %>
+                  </p>
+                  <div class="repo-footer">
+                    <span class="repo-stat-sm">★ <%= repo.stargazers_count %></span>
+                    <span class="repo-stat-sm">⑂ <%= repo.forks_count %></span>
+                  </div>
+                </a>
+                <% }) %>
+            </div>
+          </section>
+
+    </div>
   </main>
+
   <%- include('partials/footer.ejs') %>
