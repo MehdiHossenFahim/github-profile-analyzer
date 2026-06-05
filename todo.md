@@ -30,7 +30,7 @@ A developer intelligence dashboard built with **Node.js + Express + Axios + EJS*
 * [✅] Fetch GitHub user data:
 
   * `https://api.github.com/users/:username`
-* [ ] Fetch repositories:
+* [✅] Fetch repositories:
 
   * `https://api.github.com/users/:username/repos`
 * [ ] Handle API errors (404 user not found)

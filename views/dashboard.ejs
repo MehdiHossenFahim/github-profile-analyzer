@@ -1,13 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
+<%- include('partials/header.ejs') %>
+
+  <main>
     <img src="<%= data.image_url %>" alt="user image" />
-    <h1><%= data.user_name %></h1>
-    <p><%= data.bio %></p>
-  </body>
-</html>
+    <h1>
+      <%= data.user_name %>
+    </h1>
+    <p>
+      <%= data.bio %>
+    </p>
+    <h2>Repositories</h2>
+
+    <ul>
+      <% data.repos.forEach(repo=> { %>
+        <li>
+          <a href="<%= repo.html_url %>" target="_blank">
+            <%= repo.name %>
+          </a>
+          <p>
+            <%= repo.description || "No description" %>
+          </p>
+        </li>
+        <% }) %>
+    </ul>
+  </main>
+  <%- include('partials/footer.ejs') %>

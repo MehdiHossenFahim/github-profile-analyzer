@@ -14,17 +14,25 @@ app.get("/", (req, res) => {
 
 app.post("/submit", async (req, res) => {
   const user = req.body.name;
+
   try {
-    const response = await axios.get(API_URL + "users/" + user);
-    const result = response.data;
-    console.log(result);
+    const [userResponse, reposResponse] = await Promise.all([
+      axios.get(`${API_URL}users/${user}`),
+      axios.get(`${API_URL}users/${user}/repos?sort=updated&per_page=10`)
+    ]);
+
+    const profile = userResponse.data;
+    const repos = reposResponse.data;
 
     const user_data = {
-      user_name: result.name,
-      image_url: result.avatar_url,
-      bio: result.bio,
+      user_name: profile.name,
+      image_url: profile.avatar_url,
+      bio: profile.bio,
+      repos: repos
     };
+
     res.render("dashboard.ejs", { data: user_data });
+
   } catch (error) {
     console.log(error.response?.data || error.message);
     res.send("User not found");
