@@ -1,35 +1,50 @@
-```md
-# 🔍 GitSearch — GitHub Profile Analyzer
+# 🔍 GitSearch
 
-🚀 Live Demo: https://github-profile-analyzer-ashen.vercel.app/
+> A minimal developer intelligence engine that transforms any GitHub profile into clean, structured insights.
 
-A modern **developer intelligence dashboard** that analyzes GitHub profiles and generates insights like repository stats, language distribution, and developer scoring.
-
-Built with **Node.js, Express, Axios, and EJS**, featuring a clean UI, analytics dashboard, and real-time GitHub API integration.
+🚀 Live Demo → https://github-profile-analyzer-ashen.vercel.app/
 
 ---
 
-## ✨ Features
+## ✨ Overview
 
-- 🔎 Search any GitHub username
-- 👤 Developer profile analysis (avatar, bio, followers, following)
-- 📦 Repository breakdown (stars, forks, language)
+GitSearch analyzes GitHub profiles and converts raw developer data into meaningful intelligence — including repositories, language distribution, and performance scoring.
+
+---
+
+## ⚡ Core Features
+
+- 🔎 Instant GitHub profile lookup
+- 👤 Developer profile overview
+- 📦 Repository analytics (stars, forks, language)
 - 🧠 Developer scoring system (0–100)
 - 🏆 Top repository detection
-- 📊 Total stars, forks, and repo statistics
-- 🧾 Language extraction and grouping
-- 🎨 Modern responsive UI
-- ⚡ Fast GitHub API integration
+- 📊 Aggregated metrics
+- 🧾 Language distribution mapping
+- 🎨 Responsive modern UI
+- ⚡ Real-time GitHub API integration
 
 ---
 
-## 🖼️ Live Preview
+## 🧠 Intelligence Engine
 
-👉 https://github-profile-analyzer-ashen.vercel.app/
+Developer score formula:
+
+```
+
+score =
+(followers × 2) +
+(public_repos × 2) +
+(total_stars × 3) +
+(total_forks × 1)
+
+```
+
+Normalized to a **0–100 scale**.
 
 ---
 
-## 🛠️ Tech Stack
+## 🖥️ Tech Stack
 
 **Backend**
 - Node.js
@@ -38,7 +53,7 @@ Built with **Node.js, Express, Axios, and EJS**, featuring a clean UI, analytics
 
 **Frontend**
 - EJS Templates
-- HTML5 / CSS3
+- HTML5 + CSS3
 - Vanilla JavaScript
 
 **API**
@@ -51,19 +66,14 @@ Built with **Node.js, Express, Axios, and EJS**, featuring a clean UI, analytics
 ```
 
 project-root/
-│
 ├── public/
 │   ├── styles/
 │   ├── scripts/
 │   └── images/
-│
 ├── views/
 │   ├── partials/
-│   │   ├── header.ejs
-│   │   └── footer.ejs
 │   ├── index.ejs
 │   └── dashboard.ejs
-│
 ├── index.js
 ├── package.json
 └── README.md
@@ -72,9 +82,9 @@ project-root/
 
 ---
 
-## ⚙️ Installation & Setup
+## 🚀 Getting Started
 
-### 1. Clone the repository
+### 1. Clone repository
 ```bash
 git clone https://github.com/your-username/gitsearch.git
 cd gitsearch
@@ -86,13 +96,13 @@ cd gitsearch
 npm install
 ```
 
-### 3. Run locally
+### 3. Run development server
 
 ```bash
 npm run dev
 ```
 
-Server runs at:
+App runs at:
 
 ```
 http://localhost:3000
@@ -100,51 +110,38 @@ http://localhost:3000
 
 ---
 
-## 🧠 How It Works
+## 🔄 Workflow
 
-The system:
-
-1. Fetches GitHub user data using GitHub API
-2. Fetches repositories
-3. Calculates:
-
-   * Total stars
-   * Total forks
-   * Language distribution
-   * Developer score (0–100)
-4. Renders a full analytics dashboard
+1. Enter GitHub username
+2. Fetch profile + repositories
+3. Analyze data
+4. Render dashboard
 
 ---
 
-## 📊 Developer Score Formula
+## 📊 Insights Generated
 
-```
-score =
-followers × 2 +
-public_repos × 2 +
-total_stars × 3 +
-total_forks × 1
-```
-
-Normalized to a 0–100 scale.
+* Total stars
+* Total forks
+* Top repository
+* Languages used
+* Developer score
 
 ---
 
-## 🚀 Future Improvements
+## 🚧 Roadmap
 
-* 🌗 Dark / Light mode toggle
-* 📊 Chart.js analytics dashboard
-* 🔥 GitHub contribution heatmap
-* 🤖 AI-generated developer summary
-* 📄 Downloadable PDF report
-* 🔄 Compare two GitHub users
+* 🌗 Dark / Light mode
+* 📊 Chart.js analytics
+* 🔥 Contribution heatmap
+* 🤖 AI developer summary
+* 📄 PDF export
+* 🔄 Compare users
 * 💾 Search history
 
 ---
 
-## 📌 Example Users
-
-Try these usernames:
+## 🎯 Example Profiles
 
 * torvalds
 * gaearon
@@ -155,7 +152,7 @@ Try these usernames:
 
 ## 👨‍💻 Author
 
-**Mehedi Hossen Fahim**
+Mehedi Hossen Fahim
 
 * GitHub: [https://github.com/MehdiHossenFahim](https://github.com/MehdiHossenFahim)
 * LinkedIn: [https://www.linkedin.com/in/mehedihossenfahim/](https://www.linkedin.com/in/mehedihossenfahim/)
@@ -164,5 +161,6 @@ Try these usernames:
 
 ## 📜 License
 
-This project is licensed under the MIT License.
+Distributed under the MIT License. See LICENSE for details.
+
 
